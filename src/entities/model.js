@@ -1,28 +1,9 @@
-let { GWE } = require('gwe');
-let { DIRECTION } = require('../core/enums');
+let { MovingObject } = require('./moving_object');
 
-class Model extends GWE.GfxJAS {
+class Model extends MovingObject {
   constructor() {
     super();
-    this.direction = DIRECTION.FORWARD;
-    this.radius = 0;
     this.onActionBlockId = '';
-  }
-
-  getDirection() {
-    return this.direction;
-  }
-
-  setDirection(direction) {
-    this.direction = direction;
-  }
-
-  getRadius() {
-    return this.radius;
-  }
-
-  setRadius(radius) {
-    this.radius = radius;
   }
 
   getOnActionBlockId() {

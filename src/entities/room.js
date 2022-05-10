@@ -149,26 +149,27 @@ class Room {
       return;
     }
 
-    let moveDir = GWE.Utils.VEC3_ZERO;
+    let moving = false;
+
     if (GWE.inputManager.isKeyDown(GWE.InputKeyEnum.LEFT)) {
-      moveDir = GWE.Utils.VEC3_LEFT;
+      moving = true;
       this.controller.setDirection(DIRECTION.LEFT);
     }
     else if (GWE.inputManager.isKeyDown(GWE.InputKeyEnum.RIGHT)) {
-      moveDir = GWE.Utils.VEC3_RIGHT;
+      moving = true;
       this.controller.setDirection(DIRECTION.RIGHT);
     }
     else if (GWE.inputManager.isKeyDown(GWE.InputKeyEnum.UP)) {
-      moveDir = GWE.Utils.VEC3_FORWARD;
+      moving = true;
       this.controller.setDirection(DIRECTION.FORWARD);
     }
     else if (GWE.inputManager.isKeyDown(GWE.InputKeyEnum.DOWN)) {
-      moveDir = GWE.Utils.VEC3_BACKWARD;
+      moving = true;
       this.controller.setDirection(DIRECTION.BACKWARD);
     }
 
-    if (moveDir !== GWE.Utils.VEC3_ZERO) {
-      this.utilsControllerMove(GWE.Utils.VEC3_SCALE(moveDir, this.controller.getSpeed() * (ts / 1000)));
+    if (moving) {
+      this.utilsControllerMove(GWE.Utils.VEC3_SCALE(this.controller.getMoveDir(), this.controller.getSpeed() * (ts / 1000)));
       this.controller.play('RUN_' + this.controller.getDirection(), true);
     }
     else {
