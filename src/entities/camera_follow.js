@@ -3,7 +3,7 @@ let { GWE } = require('gwe');
 let ORTHO_SIZE = 8.4;
 let ORTHO_DEPTH = 100;
 let MATRIX = [1.0000, 0.0000, -0.0000, 0.0000, -0.0000, 0.0000, -1.0000, 0.0000, -0.0000, 1.0000,  0.0000, 0.0000, -0.0000, 8.4545,  0.0000, 1.0000];
-let PIXEL_PER_UNIT = 32;
+let PIXELS_PER_UNIT = 32;
 let BILLBOARD_ROTATION = [1.57, 0, 0];
 
 class CameraFollow {
@@ -11,6 +11,8 @@ class CameraFollow {
     this.targetDrawable = null;
     this.minClipOffset = [0, 0];
     this.maxClipOffset = [0, 0];
+    this.pixelsPerUnit = PIXELS_PER_UNIT;
+    this.billboardRotation = BILLBOARD_ROTATION;
     this.view = GWE.gfxManager.getView(0);
 
     this.view.setProjectionMode(GWE.ProjectionModeEnum.ORTHOGRAPHIC);
@@ -38,7 +40,19 @@ class CameraFollow {
     this.maxClipOffset[1] = maxClipOffsetY;
   }
 
+  getPixelsPerUnit() {
+    return this.pixelsPerUnit;
+  }
+
+  getBillboardRotation() {
+    return this.billboardRotation;
+  }
+
   update(ts) {
+    if (!this.targetDrawable) {
+      return;
+    }
+
     let clipOffset = this.view.getClipOffset();
     let worldPosition = this.targetDrawable.getPosition();
     let screenPosition = GWE.gfxManager.getScreenPosition(0, worldPosition[0], worldPosition[1], worldPosition[2]);
@@ -51,5 +65,3 @@ class CameraFollow {
 }
 
 module.exports.CameraFollow = CameraFollow;
-module.exports.PIXEL_PER_UNIT = PIXEL_PER_UNIT;
-module.exports.BILLBOARD_ROTATION = BILLBOARD_ROTATION;
