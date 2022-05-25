@@ -3,6 +3,8 @@ let { GWE } = require('gwe');
 let ORTHO_SIZE = 8.4;
 let ORTHO_DEPTH = 100;
 let MATRIX = [1.0000, 0.0000, -0.0000, 0.0000, -0.0000, 0.0000, -1.0000, 0.0000, -0.0000, 1.0000,  0.0000, 0.0000, -0.0000, 8.4545,  0.0000, 1.0000];
+let PIXEL_PER_UNIT = 32;
+let BILLBOARD_ROTATION = [1.57, 0, 0];
 
 class CameraFollow {
   constructor() {
@@ -49,3 +51,5 @@ class CameraFollow {
 }
 
 module.exports.CameraFollow = CameraFollow;
+module.exports.PIXEL_PER_UNIT = PIXEL_PER_UNIT;
+module.exports.BILLBOARD_ROTATION = BILLBOARD_ROTATION;

@@ -5,10 +5,7 @@ let { Spawn } = require('../entities/spawn');
 let { Model } = require('../entities/model');
 let { Trigger } = require('../entities/trigger');
 let { Controller } = require('../entities/controller');
-let { CameraFollow } = require('../entities/camera_follow');
-
-let PIXEL_PER_UNIT = 32;
-let BILLBOARD_ROTATION = [1.57, 0, 0];
+let { CameraFollow, PIXEL_PER_UNIT, BILLBOARD_ROTATION } = require('../entities/camera_follow');
 
 class Room {
   constructor(player) {
@@ -170,10 +167,10 @@ class Room {
 
     if (moving) {
       this.utilsControllerMove(GWE.Utils.VEC3_SCALE(this.controller.getMoveDir(), this.controller.getSpeed() * (ts / 1000)));
-      this.controller.play('RUN_' + this.controller.getDirection(), true);
+      this.controller.play('RUN_' + this.controller.getDirection(), true, true);
     }
     else {
-      this.controller.play('IDLE_' + this.controller.getDirection(), true);
+      this.controller.play('IDLE_' + this.controller.getDirection(), true, true);
     }
   }
 
